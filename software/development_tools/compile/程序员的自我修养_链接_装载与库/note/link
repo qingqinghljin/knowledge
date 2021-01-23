@@ -1,0 +1,103 @@
+LIBRARY_PATH,是程序编译期间查找动态链接库时指定查找共享库的路径。
+LD_LIBRARY_PATH，是程序加载运行期间查找动态链接库时除了系统默认路径之外的路径
+PATH，是可执行文件的路径。
+
+指定路径的参数：
+-I 指定头文件的搜索路径
+-L 指定库文件的搜索路径
+
+
+
+
+最近在做一个项目的客户端的SDK，实现为一个动态链接库，其依赖于其他的若干个动态库文件。那么在利用SDK开发应用程序的时候，编译的时候除了链接SDK库本身，还得链接SDK库所依赖的库，这样编译命令里面得一一的添加这些库。 
+
+比如，SDK库的名称为liba.so, 其依赖于libb.so和libc.so,那么在编译应用程序的时候使用以下命令：
+
++++++++++++++++++++++++++++++++++++++++++++++
+
+gcc -o test test.c -I. -L. -la -lb -lc
+
++++++++++++++++++++++++++++++++++++++++++++++
+
+但是如果将SDK库即liba.so交给其他的开发人员，其他的开发人员可不想编译的时候，显示的链接liba.so所依赖的库。他们更愿意编译的时候，只显示地链接liba.so。
+
+那么该怎么做呢？利用rpath这个链接选项！
+
+
+解决方法
+首先来man ld，查找链接选项rpath的含义:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ -rpath dir
+           Add  a  directory to the runtime library search path.  This is used when linking an ELF executable with
+           shared objects.  All -rpath arguments are concatenated and passed to the  runtime  linker,  which  uses
+           them  to locate shared objects at runtime.  The -rpath option is also used when locating shared objects
+           which are needed by shared objects explicitly  included  in  the  link;  see  the  description  of  the
+           -rpath-link option.  If -rpath is not used when linking an ELF executable, the contents of the environ-
+           ment variable "LD_RUN_PATH" will be used if it is defined.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+简单翻译下, rpath链接选项主要有两个功能：
+
+（1）程序运行时，优先到rpath指定的目录去寻找依赖库
+
+（2）程序链接时，在指定的目录中，隐式的链接那些动态库所需要的链接库。
+
+往往我们都熟知第一个功能，忽略第二个功能。而第二个功能正是现在所需要的。
+
+我们将liba.so，libb.so 和 libc.so拷贝的同一个目录中，然后利用rpath链接应用程序，这样编译便不需要显示的去链接liba.so所依赖的库了。
+
++++++++++++++++++++++++++++++++++++++++++++++
+
+gcc -o test test.c -I. -L. -la -Wl,-rpath=.
+
++++++++++++++++++++++++++++++++++++++++++++++
+-Wl,rpath= 
+  1.程序链接时，在rpath指定的目录中，隐式的链接那些动态库所需要的链接库
+  2.程序运行时，优先到rpath指定的目录去寻找依赖库
+
+
+将liba.so,libb.so和libc.so拷贝的同一个目录中，然后利用rpath链接应用程序，这样编译便不需要显示的去链接liba.so等库了
+指定库的名称：
+-l 指定库的名称(-lname), 从右到左，所以最右边放最基础的库
+
+eg：gcc -I ~/test_d -lmax -Wl,rpath=/home/hljin/test_d test.c
+ 
+一、 库的头文件的搜索路径
+注：各目录存在相同的文件时，先找到哪个使用哪个。
+在安装g++时，指定prefix，那么内定的搜索目录就是：
+Prefix/include
+Prefix/local/include
+Prefix/lib/gcc/--host/--version/include
+编译时可以通过-nostdingc++选项屏蔽对内定目录搜索头文件
+#include "headfile.h"
+搜索顺序为：
+1.先搜索当前目录
+2. -I 指定的目录
+3. 再搜索gcc的环境变量CPLUS_INCLUDE_PATH（C程序使用的是C_INCLUDE_PATH）
+4.最后搜索gcc的内定目录/usr/include /usr/local/include /usr/lib/gcc/x86_64-redhat-linux/4.1.1/include
+
+#include <headfile.h>
+1. -I 指定的目录
+2. 再搜索gcc的环境变量CPLUS_INCLUDE_PATH（C程序使用的是C_INCLUDE_PATH）
+3.最后搜索gcc的内定目录/usr/include /usr/local/include /usr/lib/gcc/x86_64-redhat-linux/4.1.1/include
+
+
+二 编译时库的搜索路径顺序
+注：你的Code是用到动态库还是静态库，都要在编译时指定库的路径，
+1. ld会去找GCC命令行中的参数-L的目录是否有该链接库；
+2. 再去找GCC的环境变量LIBRARY_PATH
+3. 再找内定目录/lib、/usr/lib、/usr/local/lib中是否有该链接库，
+
+三 动态库链接时或运行时搜索路径的顺序
+注：动态库链接是在运行时执行。动态库的搜索路径并不包含当前文件夹，所以即使当可执行文件和其所需的so文件在同一个文件夹，也会出现找不到so的问题，类同于#include <header_file>不搜当前目录。
+1. 编译目标代码时指定的动态库搜索路径；-Wl，-rpath=./(运行时)（当指定多个动态库搜索路径时，路径之间用冒号":"分隔） -L(编译时)
+2. 环境变量LD_LIBRARY_PATH(运行时),LIBRARY_PATH(链接时)指定的动态库搜索路径
+3. 配置文件/etc/ld.so.conf中指定的动态库搜索路径
+4. 默认的动态库搜索路径/lib
+5. 默认的动态库搜索路径/usr/lib
+
+
+注：如果编译时出现undifine 的错误那就是没有-llib ，没有加链接有头文件没有库编译不通过
+
