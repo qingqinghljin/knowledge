@@ -54,9 +54,6 @@ d      3D      向右旋转图形，每次旋转45度
 
 1. 日志问题
 
-2. 梳理gbviewer的框架，便于代码的编写和维护，也便于定位性能的瓶颈
-   -6k的大例子要5秒左右的响应时间，太长了性能得提高两到三倍才能
-    达到redhawk性能
 
 
 
@@ -80,10 +77,11 @@ trac 2：
 问题2：
 有些非via shape的node也为0，这会让这个shape没有edge，需要注意
 
-2. 陈献从内部download出来的文件，跟踪进度。
-   - 出来之后记录format格式，并读取解决shape断掉的情况1
-
 3. 填写worst list em
+
+2. 梳理gbviewer的框架，便于代码的编写和维护，也便于定位性能的瓶颈
+   -6k的大例子要5秒左右的响应时间，太长了性能得提高两到三倍才能
+    达到redhawk性能
 
 confused:
 1. 因为某些shape没有node，所以没有edge，当鼠标点击的时候对应的R显示为0 但是gbxdebug时打印的经过这条shape的edge是有R的。所以shape没有node的问题会到时current断掉还会导致某些shape点击是R为0。
