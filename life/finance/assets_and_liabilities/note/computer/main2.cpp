@@ -1,6 +1,11 @@
 #include <iostream>
+#include <stdio.h>
 int main()
 {
+  using std::cin;
+  using std::cout;
+  using std::endl;
+  printf("\n");
   double con_down;
   double my_down;
   double max_down;
