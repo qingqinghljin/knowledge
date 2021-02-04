@@ -64,14 +64,25 @@ d      3D      向右旋转图形，每次旋转45度
 
 work~:
                                     gxviewer
-
-1. 梳理gbviewer的框架，便于代码的编写和维护，也便于定位性能的瓶颈
-   -6k的大例子要5秒左右的响应时间，太长了性能得提高两到三倍才能
-    达到redhawk性能
+gxviewer needs new function to search node by name in gcap(node ZN 2) and spice (ZN&p2)
 
 
 
                                     gbviewer
+defect:
+
+1. gbviewer should not be able to select nodes of other nets when they are hidden.  ok
+
+2. gbviewer needs new function "go to node"
+
+3. 梳理gbviewer的框架，便于代码的编写和维护，也便于定位性能的瓶颈
+   -6k的大例子要5秒左右的响应时间，太长了性能得提高两到三倍才能
+    达到redhawk性能
+
+                                    postpro
+instance ir drop 和 redhawk相差很大
+
+
 
 confusion:
 
