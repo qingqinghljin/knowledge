@@ -18,7 +18,7 @@ int main()
   cin >> con_down;
   最近高点涨幅
     最近低点涨幅
-    
+    净值估算涨幅
     
   con_down /= 100.0;
   cout << "我的收益率: ";
