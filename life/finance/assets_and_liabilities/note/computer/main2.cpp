@@ -14,14 +14,17 @@ int main()
   double all_down = 0.0;
   double principal = 0.0;
   double investment_amount = 0.0;
-  cout << "最近一次连续下跌幅度(%): ";
-  cin >> con_down;
-  最近高点涨幅
-    最近低点涨幅
-    净值估算涨幅
-    
+
+  cout << "最近高点涨幅: ";
+  cin >> hight_point;
+  cout << "最近低点涨幅: ";
+  cin >> low_point;
+  cout << "净值估算涨幅: ";
+  cin >> valuation;
+  con_down = (low_point - hight_point) + valuation;
+  cout << "最近一次连续下跌幅度(%): " << con_down << endl;
   con_down /= 100.0;
-  cout << "我的收益率: ";
+  cout << "持有收益率: ";
   cin >> my_down;
   my_down /= 100.0;
   //  cout << "本金: ";
@@ -32,7 +35,7 @@ int main()
     if (con_down > -0.05 and max_down > -0.05)
       break;
     if (my_down < 0.0) {
-      all_down = max_down * 1.5; 
+      all_down = max_down * 2.5; 
     } else {
       all_down = con_down * 2.0;
     }
@@ -40,7 +43,8 @@ int main()
   investment_amount = principal * all_down;
   investment_amount = investment_amount < 0 ?
 		      -investment_amount : investment_amount;
-  cout << "总跌幅: " << max_down * 100.0 << "%" << endl;
+  all_down = all_down < 0 ? -all_down : all_down;
+  cout << "预估持有收益率: " << max_down * 100.0 << "%" << endl;
   cout << "建议投入本金的: " << all_down * 100 << "%" << endl;
   cout << "建议单笔投入金额: " << investment_amount << endl;
 }
