@@ -5,6 +5,9 @@ int main()
   using std::cin;
   using std::cout;
   using std::endl;
+  double hight_point;
+  double low_point;
+  double valuation;
   double con_down = 0.0;
   double my_down = 0.0;
   double max_down = 0.0;
@@ -13,12 +16,17 @@ int main()
   double investment_amount = 0.0;
   cout << "最近一次连续下跌幅度(%): ";
   cin >> con_down;
+  最近高点涨幅
+    最近低点涨幅
+    
+    
   con_down /= 100.0;
   cout << "我的收益率: ";
   cin >> my_down;
   my_down /= 100.0;
-  cout << "本金: ";
-  cin >> principal;
+  //  cout << "本金: ";
+  
+   principal = 4000.0;
   do{
     max_down = con_down + my_down;
     if (con_down > -0.05 and max_down > -0.05)
