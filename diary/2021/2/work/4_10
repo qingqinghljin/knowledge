@@ -79,8 +79,10 @@ defect:
    -6k的大例子要5秒左右的响应时间，太长了性能得提高两到三倍才能
     达到redhawk性能
 
+4. 
+
                                     postpro
-instance ir drop 和 redhawk相差很大
+1. instance ir drop 和 redhawk相差很大
 
 
 
