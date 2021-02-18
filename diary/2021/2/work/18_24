@@ -54,17 +54,35 @@ d      3D      向右旋转图形，每次旋转45度
 5. oa替换成我们自己的，
 
                                    gbviewer
+- 显示的ascci report不能通过滚动调翻阅的问题
 
+- summary重复出现的问题
 
-1. 日志问题：
+- 打开某些例子em report gbviewer没有加载的问题
+
+- 按shape的长度计算实际的shape阻值
+
+- 优化80万个net下，stShapeNodeIds文件读取速度慢的问题
+
+- 读取最新的stShapeNodeIds文件
+
+- 读取shape touch文件
+
+- 没有指定shell，glorybolt没有调用子bianry却没有打印提示的问题
+
+- 为每个bianry修改title格式和 通过makefile修改版本信息
+
+- 353版本和363版本显示出的R 值不一样，为什么？
+
+- 日志问题：
  - 日志分在terimal中打印和在gbviewer内部窗口打印，打印日志的时候如何区分打印日志是打印在哪个窗口
  - 日志分内部版和发布版，什么样的日志归为内部版什么样的日志归为发布版
 
-2. report读取和design读取应该错开的问题，report放在后台读取让gbviewer初始化打开更快，
+- report读取和design读取应该错开的问题，report放在后台读取让gbviewer初始化打开更快，
 
-3. gbviewer needs new function "go to node"
+- gbviewer needs new function "go to node"
 
-4. 梳理gbviewer的框架，便于代码的编写和维护，也便于定位性能的瓶颈
+- 梳理gbviewer的框架，便于代码的编写和维护，也便于定位性能的瓶颈
    -6k的大例子要5秒左右的响应时间，太长了性能得提高两到三倍才能
     达到redhawk性能
 
@@ -80,18 +98,9 @@ gbsim
 gbpostpro
 can note find node警告等级过高
 
-
 work~:
                                     gbviewer
-defect:
 
-1. gbviewer should not be able to select nodes of other nets when they are hidden. 
-
-                                    postpro
-1. instance ir drop 和 redhawk相差很大
-
-
-confusion:
 
 
 
