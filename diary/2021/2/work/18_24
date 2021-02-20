@@ -56,6 +56,8 @@ d      3D      向右旋转图形，每次旋转45度
                                    gbviewer
 - 优化80万个net下，stShapeNodeIds文件读取速度慢的问题
 
+- 电流方向的问题
+
 - 为什么只提取一个net会快的多
 
 - 显示的ascci report不能通过滚动调翻阅的问题
@@ -65,8 +67,6 @@ d      3D      向右旋转图形，每次旋转45度
 - 打开某些例子em report gbviewer没有加载的问题
 
 - 按shape的长度计算实际的shape阻值
-
-- 读取最新的stShapeNodeIds文件
 
 - 读取shape touch文件
 
