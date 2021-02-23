@@ -28,16 +28,18 @@ int main()
   cin >> my_down;
   my_down /= 100.0;
   //  cout << "本金: ";
-  
-   principal = 4000.0;
+  double factor;
+  cout << "倍率: ";
+  cin >> factor;
+  principal = 4000.0;
   do{
     max_down = con_down + my_down;
     if (con_down > -0.05 and max_down > -0.05)
       break;
     if (my_down < 0.0) {
-      all_down = max_down * 2.5; 
+      all_down = max_down * factor; 
     } else {
-      all_down = con_down * 2.0;
+      all_down = con_down * factor;
     }
   }while(false);
   investment_amount = principal * all_down;
