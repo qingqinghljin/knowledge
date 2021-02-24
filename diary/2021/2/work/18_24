@@ -54,8 +54,6 @@ d      3D      向右旋转图形，每次旋转45度
 5. oa替换成我们自己的，
 
                                    gbviewer
-- 优化80万个net下，stShapeNodeIds文件读取速度慢的问题
-
 - 读取明阳提供的文件，解决shape没有edge的问题
 
 - 默认不显示float net
@@ -107,6 +105,8 @@ can note find node警告等级过高
 work~:
                                     gbviewer
 - 打开viewer，但是看不到worst em report的问题，可能是postpro的数据不全导致
+
+- 优化80万个net下，stShapeNodeIds文件读取速度慢的问题
 
 confusion:
 - 有些net没有找到对应的ntkNet的id，对应不起来？
