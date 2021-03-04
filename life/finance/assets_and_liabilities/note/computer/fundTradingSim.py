@@ -1,5 +1,5 @@
-#!/usr/bin/python
-fund_file = open("fund.txt", "+")
+#!/usr/bin/python3
+fund_file = open("../my_assets", "r")
 
 fund_file.close()
 
