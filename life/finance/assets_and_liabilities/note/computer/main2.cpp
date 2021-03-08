@@ -1,10 +1,14 @@
-#include <iostream>
+#include <math.h>
 #include <stdio.h>
+#include <iostream>
+
 int main()
 {
   using std::cin;
   using std::cout;
   using std::endl;
+  double peak;
+  double now_peak;
   double hight_point;
   double low_point;
   double valuation;
@@ -14,7 +18,10 @@ int main()
   double all_down = 0.0;
   double principal = 0.0;
   double investment_amount = 0.0;
-
+  cout << "3年历史最高点：";
+  cin >> peak;
+  cout << "三年中现在所处位置：";
+  cin >> now_peak;
   cout << "最近高点涨幅: ";
   cin >> hight_point;
   cout << "最近低点涨幅: ";
@@ -29,18 +36,19 @@ int main()
   my_down /= 100.0;
   //  cout << "本金: ";
   double factor;
-  cout << "倍率: ";
-  cin >> factor;
+  //  cout << "倍率: ";
+  //  cin >> factor;
   principal = 4000.0;
+  double x =((peak-now_peak)/peak);
+  principal = principal*x;
+  cout << "本金: " << principal << endl;
+  factor = pow(1+x, 1+x);
+  cout << "倍率: " << factor << endl;
   do{
     max_down = con_down + my_down;
-    if (con_down > -0.05 and max_down > -0.05)
+    if (con_down > -0.05)
       break;
-    if (my_down < 0.0) {
-      all_down = max_down * factor; 
-    } else {
-      all_down = con_down * factor;
-    }
+    all_down = con_down * factor;
   }while(false);
   investment_amount = principal * all_down;
   investment_amount = investment_amount < 0 ?
