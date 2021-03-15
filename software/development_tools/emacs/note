@@ -1,5 +1,8 @@
+https://www.gnu.org/software/emacs/manual/html_node/emacs/Old-Revisions.html
 1. emacs 结合 svn使用看某个版本的代码
-ctrl + C  --  v -- ~
+C-x v ~
+M-x vc-ediff
+...
 然后输入版本号
 
 2. ctrl + 删除键 删除一个单词
