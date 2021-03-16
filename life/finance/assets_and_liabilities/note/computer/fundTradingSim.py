@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-fund_file = open("../my_assets", "r")
-=======
 import math
 
 def estimatedRate(cost, pri, c_cost, inves):
@@ -58,13 +55,4 @@ asset_value = float(input("funds' net asset value: "))
 
 estimated   = estimatedRate(position_cost, principal, asset_value, investment_amount)
 print("estimated: %.2f " % estimated*100.0)
-
-
-
-
-
-
-
->>>>>>> c34e21dc02d004002bda7d00e7a55870bceb86c8
-
 
