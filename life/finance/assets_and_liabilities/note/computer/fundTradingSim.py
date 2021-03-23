@@ -6,6 +6,9 @@ def estimatedRate(cost, pri, c_cost, inves):
     y = pri*c_cost + inves*cost
     z = 1 - x/y
     return z
+
+
+
 # h
 h_p = input("highest point:")
 h_p = float(h_p)
