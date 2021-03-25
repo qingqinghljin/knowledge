@@ -18,8 +18,7 @@ def fundHightLow(filename, id):
 # h
 id  = input("fund id:")
 list = fundHightLow("../data", id)
-for i in list:
-    print(i)
+print(list[0], list[1], list[2])
 l_p = float(list[1])
 h_p = float(list[2])
 c_p = input("current point:")
